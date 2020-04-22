@@ -1,15 +1,5 @@
 import json
 
-def get_genres(tup):
-    res = set()
-    for t in tup:
-        words = t.split(' ')
-        for w in words:
-            if w.lower() in GENRES:
-                res.add(GENRES[w])
-    
-    return res
-
 track_artist_map = json.load(open('track_artist_map.json', 'r'))
 artist_genre_map = json.load(open('artist_genre_map_MusicBrainz.json', 'r'))
 track_genre_map = {}
