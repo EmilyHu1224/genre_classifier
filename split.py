@@ -19,8 +19,7 @@ GENRES = {
     'punk': 15,
     'disco': 16,
     'gospel': 17,
-    'christian': 18,
-    'easy listening': 19
+    'easy listening': 18
 }
 
 def get_label(genre):
