@@ -16,7 +16,6 @@ from sklearn.model_selection import GridSearchCV
 #  publisher={Elsevier}
 #}
 
-# TODO import data from the .npy files
 X_train = np.load('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_Xtrain.npy')
 Y_train = np.load('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_Ytrain.npy')
 X_test = np.load('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_Xtest.npy')
