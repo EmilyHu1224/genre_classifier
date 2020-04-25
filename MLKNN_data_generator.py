@@ -4,7 +4,7 @@ import numpy as np
 
 # The total number of song rows is 237662, but not all the songs are classified
 # The total number of classified songs is 96949
-dataArray = np.zeros((96949, 5018), dtype=np.int8)
+dataArray = np.zeros((96949, 5017), dtype=np.int8)
 # track to genre mapping
 trackGenreMap = json.load(open('C:/Users/ianev/Documents/GitHub/genre_classifier/track_genre_map.json','r'))
 
@@ -21,15 +21,14 @@ GENRES = {
     'house': 7,
     'jazz': 8,
     'pop': 9,
-    'r&b': 10,
-    'soul': 11,
-    'rock': 12,
-    'hip hop': 13,
-    'metal': 14,
-    'punk': 15,
-    'disco': 16,
-    'gospel': 17,
-    'easy listening': 18
+    'soul': 10,
+    'rock': 11,
+    'hip hop': 12,
+    'metal': 13,
+    'punk': 14,
+    'disco': 15,
+    'gospel': 16,
+    'easy listening': 17
 }
 genres = ['genre_blues',
           'genre_comedy',
@@ -40,7 +39,6 @@ genres = ['genre_blues',
           'genre_house',
           'genre_jazz',
           'genre_pop',
-          'genre_r&b',
           'genre_soul',
           'genre_rock',
           'genre_hip_hop',
@@ -82,7 +80,7 @@ for track_id in conn.execute('''SELECT DISTINCT track_id
                 dataArray[counter, wordCol[word]] = count
 
         for label in trackGenreMap[track_id[0]]:
-            dataArray[counter, GENRES[label]-19] = 1
+            dataArray[counter, GENRES[label]-18] = 1
 
         counter = counter + 1
         if counter > 99998:
@@ -92,7 +90,6 @@ train_test = np.split(dataArray, [77559], 0)
 X_train_Y_train = np.split(train_test[0], [5000], 1)
 X_test_Y_test = np.split(train_test[1], [5000], 1)
 
-np.save('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_fullData.npy', dataArray)
 np.save('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_Xtrain.npy', X_train_Y_train[0])
 np.save('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_Ytrain.npy', X_train_Y_train[1])
 np.save('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_Xtest.npy', X_test_Y_test[0])

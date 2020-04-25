@@ -17,18 +17,20 @@ from sklearn.model_selection import GridSearchCV
 #}
 
 # TODO import data from the .npy files
+X_train = np.load('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_Xtrain.npy')
+Y_train = np.load('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_Ytrain.npy')
+X_test = np.load('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_Xtest.npy')
+Y_test = np.load('C:/Users/ianev/Documents/GitHub/genre_classifier/MLKNN_Ytest.npy')
+
+X_train_split = np.split(X_train, [5000])
+Y_train_split = np.split(Y_train, [5000])
 
 # Classifier section
 # GridSearch to find best parameters
-# ripped from: http://scikit.ml/api/skmultilearn.adapt.mlknn.html
-# Wont work until the data is sorted out
-parameters = {'k': range(1,3), 's': [0.5, 0.7, 1.0]}
-score = 'f1_macro'
+parameters = {'k': [4], 's': [0.5]}
+score = 'accuracy'
 
-classifier = GridSearchCV(MLkNN(), parameters, scoring=score)
-classifier.fit(X_train, Y_train)
+clf = GridSearchCV(MLkNN(), parameters, scoring=score)
+clf.fit(X_train_split[0], Y_train_split[0])
 
-print (classifier.best_params_, classifier.best_score_)
-
-# predict
-predictions = classifier.predict(X_test)
+print (clf.best_params_, clf.best_score_)
